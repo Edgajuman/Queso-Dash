@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			zoom: 100%;
+		}
+	</style>
+	<form>
+		<label for="nombre">Nombre:</label>
+		<input type="text" id="nombre" name="nombre">
+		<button type="submit">Enviar</button>
+	</form>	
+	<div class="container">	
+  	<p class="user"><span id="saludo" style="color: rgb(255, 255, 255); font-size: 30px;"></span></p>
+	</div>	
+	  <script>
+		const formulario = document.querySelector('form');
+		formulario.addEventListener('submit', function(evento) {
+		  evento.preventDefault();
+		  const nombre = document.querySelector('#nombre').value;
+		  const saludo = document.querySelector('#saludo');
+		  saludo.textContent = nombre;
+		});
+	</script>
+	<script src="queso dash.js"></script>
+	<link rel="stylesheet" href="queso dash.css">
+	
+	<title>Queso Dash</title>
+	
+
+</head>
+<body>
+	<div class="orientation-overlay">
+		<img src="texturas/voltea.png" alt="Gira tu dispositivo a modo horizontal">
+	  </div>
+
+	<div id="pantalla-carga">
+		<div class="loader"></div>
+	</div>
+	<style>
+		@keyframes moveBackground {
+			0% {
+				background-position-x: 0;
+			}
+			50% {
+				background-position-x: -100px; /* Ajusta la cantidad de desplazamiento aquí */
+			}
+			100% {
+				background-position-x: 0;
+			}
+		}
+
+		@keyframes jumpAnimation {
+		0%, 100% {
+			transform: translateY(0) scale(1);
+		}
+		50% {
+			transform: translateY(-80px) scaleX(0.8); /* Ajusta la altura del salto y el factor de escala aquí */
+		}
+	}
+
+	.icon {
+		margin-left: 30px;
+		margin-top: -160px;
+		animation: jumpAnimation 1.5s ease-out infinite; /* Ajusta la duración total de la animación aquí */
+	}
+
+	
+
+
+
+	body {
+		background-image: url('fondos/fondo1.png');
+		background-size: cover;
+		background-attachment: 200%; /* Ajusta el tamaño del fondo aquí */
+		background-repeat: no-repeat;
+		animation: moveBackground 10s linear infinite; /* Ajusta la duración de la animación aquí */
+		color: #ff0000;
+		font-family: Arial, sans-serif;
+	}
+
+	nav ul {
+		display: flex;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	nav ul li {
+		margin: 0 10px;
+	}
+	nav ul li a {
+		color: #fff;
+		text-decoration: none;
+		font-size: 20px;
+		transition: all 0.3s ease;
+	}
+	nav ul li a:hover {
+		color: #ff9900;
+		text-shadow: 0px 0px 10px #ff9900;
+	}
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 20px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	.modal-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0);
+		display: none;
+		justify-content: center;
+		align-items: center;
+		z-index: 10;
+	}
+
+	.modal-content {
+		background-color: rgba(255, 255, 255, 0);
+		padding: 20px;
+	}
+
+	.modal-content img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+	.button-overlay {
+		position: absolute;
+		top: 10px;
+		right: 800px;
+	}
+
+	.button-instagram {
+		position: absolute;
+		top: 10px;
+		right: 580px;
+	}
+
+	.button-twitter {
+		position: absolute;
+		top: 10px;
+		right: 360px;
+	}
+
+	.button-link {
+		position: absolute;
+		top: 10px;
+		right: 700px;
+	}
+
+	.button-discord {
+		position: absolute;
+		top: 10px;
+		right: 450px;
+	}
+
+	.button-overlay button {
+		margin-left: 10px;
+	}
+
+	.boton-enlace {
+		margin-left: 0px;
+		margin-top: 0px;
+	}
+
+	.boton-enlace img {
+		width: 160px;
+		height: 160px;
+	}
+
+	.ventana-emergente {
+    display: none; /* Oculta la ventana emergente por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0);
+    padding: 20px;
+    z-index: 9999;
+  }
+
+  .sonido-loop {
+    display: none; /* Oculta la ventana emergente por defecto */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0);
+    padding: 20px;
+    z-index: 9999;
+  }
+  
+  .boton-cerrar {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: -10px;
+	right: 850px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .change {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 60px;
+	right: 290px;
+  }
+
+  .BG1 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 720px;
+  }
+
+  .BG11 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 200px;
+	right: 730px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG2 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 560px;
+  }
+
+  .BG22 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 200px;
+	right: 570px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+  
+  .BG3 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 409px;
+  }
+
+  .BG33 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 200px;
+	right: 419px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG4 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 258px;
+  }
+
+  .BG44 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 200px;
+	right: 268px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG5 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 300px;
+	right: 720px;
+  }
+
+  .BG55 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 350px;
+	right: 730px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG6 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 300px;
+	right: 560px;
+  }
+
+  .BG66 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 350px;
+	right: 570px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG7 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 300px;
+	right: 409px;
+  }
+
+  .BG77 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 350px;
+	right: 419px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG8 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 300px;
+	right: 258px;
+  }
+
+  .BG88 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 350px;
+	right: 268px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .BG9 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 450px;
+	right: 490px;
+  }
+
+  .BG99 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 500px;
+	right: 500px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+
+
+  .loopeado {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 60px;
+	right: 290px;
+  }
+
+  .LP1 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 120px;
+	right: 720px;
+  }
+
+  .LP11 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 170px;
+	right: 730px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .LP2 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 120px;
+	right: 560px;
+  }
+
+  .LP22 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 170px;
+	right: 570px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+  
+  .LP3 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 120px;
+	right: 409px;
+  }
+
+  .LP33 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 170px;
+	right: 419px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .LP4 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 120px;
+	right: 258px;
+  }
+
+  .LP44 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 170px;
+	right: 268px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .LP5 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 270px;
+	right: 720px;
+  }
+
+  .LP55 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 320px;
+	right: 730px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .LP6 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 270px;
+	right: 560px;
+  }
+
+  .LP66 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 320px;
+	right: 570px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .LP7 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 270px;
+	right: 409px;
+  }
+
+  .LP77 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 320px;
+	right: 419px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .LP8 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 270px;
+	right: 258px;
+  }
+
+  .LP88 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 320px;
+	right: 268px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .IC1 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 750px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .IC2 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 620px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .IC3 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 490px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .IC4 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 360px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .IC5 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 230px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+
+  .IC6 {
+    display: flex;
+    margin-top: 0px;
+	position: absolute;
+	top: 150px;
+	right: 100px;
+	background-color: rgba(255, 255, 255, 0);
+  }
+	</style>
+
+</head>
+<body>
+	<header>
+		<center>
+			<h1>
+			  <img src="texturas/titulo.png" alt="Logo GDPS" width="800" height="280" class="anime">
+			</h1>
+		  </center>
+
+		  <div class="container">
+			<button class="rebote" style="margin-left: 1135px; margin-top: -600px;" id="info" class="ventana-emergente">
+			  <img src="texturas/info.png" width="80" height="80">
+			</button>
+			  <img src="texturas/glow.png" width="110" height="110" style="margin-left: 1120px; margin-top: -356px;" id="rota">
+		  </div>
+
+			<div id="informacion" class="ventana-emergente">
+				<img src="texturas/information.png" alt="Imagen emergente" width="900" height="600">
+				<button id="cerrado" class="boton-cerrar">
+				<img src="texturas/cerrar.png" alt="Imagen emergente" width="120" height="120">
+				</button>
+
+		  </div>
+		  
+	</header>
+	<nav>
+		
+		
+	<div class="container">
+		<button class="boton-anima" style="margin-left: 485px; margin-top: 10px;" id="miBoton" class="boton-enlace" onclick="location.href='otros juegos/car/index.html';">
+		  <img src="texturas/play.png" width="280" height="260">
+		</button>
+	  </div>
+	
+      <div class="container">
+		<button class="boton-anima" style="margin-left: 150px; margin-top: -330px;" id="iconos" class="ventana-emergente">
+		  <img src="texturas/icon.png" width="200" height="200">
+		</button>
+	  </div>
+
+	  <div class="container">
+		<button style="margin-left: 870px; margin-top: -400px;" id="miBoton" class="rotate-button" onmousedown="startRotation()" onmouseup="stopRotation()">
+		  <img src="texturas/new.png" width="200" height="200">
+		</button>
+	  </div>
+  
+	  
+		<div class="container">
+	  <button class="boton-anima" style="margin-left: 1000px; margin-top: -100px;" id="musica" class="boton-enlace">
+		<img src="texturas/cambiar fondo.png" width="120" height="120">
+	  </button>
+	</div>
+
+	
+	  <audio id="nada" src="nada.mp3"></audio>
+	  <div class="container">
+		<button class="boton-anima" style="margin-left: 1030px; margin-top: -20px;" id="miBoton" onclick="reproducirAudio('nada')">
+			<img src="texturas/sonido desactivado.png" width="50" height="50">
+			</button>
+		</div>
+	  
+
+
+
+	<div id="miVentanaEmergente" class="ventana-emergente">
+		<img src="texturas/tabla.png" alt="Imagen emergente" width="900" height="600">
+		<button id="cerrarVentana" class="boton-cerrar">
+		<img src="texturas/cerrar.png" alt="Imagen emergente" width="120" height="120">
+		</button>
+
+		<img src="texturas/change.png" class="change" width="420" height="40">
+
+		<img src="texturas/BG1.png" class="BG1" width="70" height="40">
+		<button id="cambiarFondo" class="BG11">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG2.png" class="BG2" width="70" height="40">
+		<button id="cambiarFondo2" class="BG22">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG3.png" class="BG3" width="70" height="40">
+		<button id="cambiarFondo3" class="BG33">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG4.png" class="BG4" width="70" height="40">
+		<button id="cambiarFondo4" class="BG44">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG5.png" class="BG5" width="70" height="40">
+		<button id="cambiarFondo5" class="BG55">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG6.png" class="BG6" width="70" height="40">
+		<button id="cambiarFondo6" class="BG66">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG7.png" class="BG7" width="70" height="40">
+		<button id="cambiarFondo7" class="BG77">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG8.png" class="BG8" width="70" height="40">
+		<button id="cambiarFondo8" class="BG88">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/BG9.png" class="BG9" width="70" height="40">
+		<button id="cambiarFondo9" class="BG99">
+			<img src="texturas/boton.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+	 </div>
+
+
+
+	 <div class="container">
+		<img src="iconos/icon1.png" width="80" height="80" style="margin-left: 30px; margin-top: -120px;" class="icon" id="cube">
+	</div>
+
+	  <div class="container">
+		<button class="boton-anima" style="margin-left: 150px; margin-top: -300px;" id="miBoton" class="boton-enlace" onclick="location.href='cubo saltarin.html';">
+		  <img src="texturas/ajustes.png" width="40" height="40">
+		</button>
+	  </div>
+
+	  <div id="ICO" class="ventana-emergente" class="container">
+		<img src="texturas/tablamusica.png" alt="Imagen emergente" width="900" height="350">
+		<button id="cer" class="boton-cerrar">
+		<img src="texturas/cerrar.png" alt="Imagen emergente" width="120" height="120">
+		</button>
+
+		<button id="icon1" class="IC1" onclick="cambiarImagen('iconos/icon1.png')">
+			<img src="iconos/icon1.png" alt="Imagen emergente" width="70" height="70">
+		</button>
+
+			<button id="icon2" class="IC2" onclick="cambiarImagen('iconos/icon2.png')">
+				<img src="iconos/icon2.png" alt="Imagen emergente" width="70" height="70">
+			</button>
+
+				<button id="icon3" class="IC3" onclick="cambiarImagen('iconos/icon3.png')">
+					<img src="iconos/icon3.png" alt="Imagen emergente" width="70" height="70">
+				</button>
+
+					<button id="icon4" class="IC4" onclick="cambiarImagen('iconos/icon4.png')">
+						<img src="iconos/icon4.png" alt="Imagen emergente" width="70" height="70">
+					</button>
+
+						<button id="icon5" class="IC5" onclick="cambiarImagen('iconos/icon5.png')">
+							<img src="iconos/icon5.png" alt="Imagen emergente" width="70" height="70">
+						</button>
+
+							<button id="icon6" class="IC6" onclick="cambiarImagen('iconos/icon6.png')">
+								<img src="iconos/icon6.png" alt="Imagen emergente" width="70" height="70">
+							</button>
+  </div>
+
+	  <div class="container">
+		<img src="texturas/linea.png" width="180" height="4" style="margin-left: -25px; margin-top: -120px;" class="line">
+	  </div> 
+
+	 <div class="container">
+		<button class="boton-anima" id="miBoton" class="boton-enlace" onclick="location.href='quesogame.html';">
+	  <img src="texturas/user.png" width="130" height="130" style="margin-left: 10px; margin-top: -2000px;"
+	  class="user">
+	</button>
+	</div>
+	 
+
+	<div style="position: relative;" class="container">
+		<img src="texturas/barra1.png" width="820" height="100" style="margin-left: 230px; margin-top: -100px;" class="barra">
+		
+		<div class="container">
+		<button class="boton-anima" style="margin-left: -750px; margin-top: -140px;" id="miBoton" class="boton-creditos" onclick="location.href='creditos.html';">
+			<img src="texturas/credits.png" width="90" height="90">
+		 </button>
+		</div>
+
+		<div class="container">
+		 <button class="boton-anima" style="margin-left: -630px; margin-top: -140px;" id="miBoton" class="boton-enlace" onclick="showModal()">
+			<img src="texturas/redes.png" width="90" height="90">
+		  </button>
+		</div>
+
+		  <div class="container">
+		<button class="boton-anima" style="margin-left: -500px; margin-top: -140px;" id="sonido" class="boton-musica">
+			<img src="texturas/menu musica.png" width="90" height="90">
+		</button>
+		</div>
+
+		<div id="miSonidoLoop" class="ventana-emergente">
+			<img src="texturas/tablamusica.png" alt="Imagen emergente" width="900" height="400">
+			<button id="cerradura" class="boton-cerrar">
+			<img src="texturas/cerrar.png" alt="Imagen emergente" width="120" height="120">
+			</button>
+
+			<img src="texturas/musica.png" class="loopeado" width="420" height="40">
+
+
+			<img src="texturas/loop1.png" class="LP1" width="70" height="40">
+			<audio id="miAudio1" src="sonidos/menuLoop.mp3"></audio>
+		<button id="loop1" class="LP11" onclick="reproducirAudio('miAudio1')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop2.png" class="LP2" width="70" height="40">
+			<audio id="miAudio2" src="sonidos/menuLoop2.mp3"></audio>
+		<button id="loop2" class="LP22" onclick="reproducirAudio('miAudio2')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop3.png" class="LP3" width="70" height="40">
+			<audio id="miAudio3" src="sonidos/menuLoop3.mp3"></audio>
+		<button id="loop3" class="LP33" onclick="reproducirAudio('miAudio3')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop4.png" class="LP4" width="70" height="40">
+			<audio id="miAudio4" src="sonidos/menuLoop4.mp3"></audio>
+		<button id="loop4" class="LP44" onclick="reproducirAudio('miAudio4')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop5.png" class="LP5" width="70" height="40">
+			<audio id="miAudio5" src="sonidos/menuLoop5.mp3"></audio>
+		<button id="loop5" class="LP55" onclick="reproducirAudio('miAudio5')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop6.png" class="LP6" width="70" height="40">
+			<audio id="miAudio6" src="sonidos/menuLoop6.mp3"></audio>
+		<button id="loop6" class="LP66" onclick="reproducirAudio('miAudio6')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop7.png" class="LP7" width="70" height="40">
+			<audio id="miAudio7" src="sonidos/menuLoop7.mp3"></audio>
+		<button id="loop7" class="LP77" onclick="reproducirAudio('miAudio7')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+			<img src="texturas/loop8.png" class="LP8" width="70" height="40">
+			<audio id="miAudio8" src="sonidos/menuLoop8.mp3"></audio>
+		<button id="loop8" class="LP88" onclick="reproducirAudio('miAudio8')">
+			<img src="texturas/sonido activado.png" alt="Imagen emergente" width="50" height="50">
+			</button>
+
+		</div>
+
+		<div class="container">
+		<button class="boton-anima" style="margin-left: 600px; margin-top: -220px;" id="miBoton" class="boton-enlace" onclick="location.href='https://www.youtube.com/hashtag/quesodash';">
+			<img src="texturas/Trailers.png" width="90" height="90">
+		  </button>
+		</div>
+	</div>
+	
+	<div class="modal-overlay" id="modalOverlay" class="container" onclick="hideModal()">
+		<div class="modal-content">
+			<img src="texturas/tabla.png" width="900" height="600">
+			<div class="button-overlay" class="container">
+				<button style="margin-left: 0px; margin-top: 200px;" id="miBoton" class="boton-enlace" onclick="location.href='https://www.youtube.com/@elgeniodelqueso3831';">
+				  <img src="texturas/Youtube.png" width="200" height="200">
+				</button>
+			  </div>
+			  <div class="button-instagram" class="container">
+				<button style="margin-left: 0px; margin-top: 200px;" id="miBoton" class="boton-enlace" onclick="location.href='https://www.instagram.com/elgeniodelqueso';">
+				  <img src="texturas/Instagram.png" width="200" height="200">
+				</button>
+			  </div>
+			  <div class="button-twitter" class="container">
+				<button style="margin-left: 0px; margin-top: 200px;" id="miBoton" class="boton-enlace" onclick="location.href='https://twitter.com/ElGeniodelQueso';">
+				  <img src="texturas/Twitter.png" width="200" height="200">
+				</button>
+			  </div>
+			  <div class="button-link" class="container">
+				<button style="margin-left: 0px; margin-top: 380px;" id="miBoton" class="boton-enlace" onclick="location.href='https://linktr.ee/elgeniodelqueso';">
+				  <img src="texturas/Linktree.png" width="200" height="200">
+				</button>
+			  </div>
+			  <div class="button-discord" class="container">
+				<button style="margin-left: 0px; margin-top: 380px;" id="miBoton" class="boton-enlace" onclick="location.href='https://discord.gg/EgW7zxSSQf';">
+				  <img src="texturas/discord.png" width="200" height="200">
+				</button>
+			  </div>
+			  <div class="container">
+				<img src="texturas/el genio.png" width="380" height="90" style="margin-left: 230px; margin-top: -560px;" class="texto">
+			  </div>
+		</div>
+	</div>
+
+	
+
+	<script>
+		document.getElementById('info').addEventListener('click', function() {
+    document.getElementById('informacion').style.display = 'block'; // Muestra la ventana emergente
+    
+	document.getElementById('cerrado').addEventListener('click', function() {
+      document.getElementById('informacion').style.display = 'none'; // Oculta la ventana emergente al hacer clic en el botón de cerrar
+    });
+  });
+
+
+  document.getElementById('iconos').addEventListener('click', function() {
+    document.getElementById('ICO').style.display = 'block'; // Muestra la ventana emergente
+    
+	document.getElementById('cer').addEventListener('click', function() {
+      document.getElementById('ICO').style.display = 'none'; // Oculta la ventana emergente al hacer clic en el botón de cerrar
+    });
+  });
+</script>
+	  
+	<script>
+		function showModal() {
+			var modalOverlay = document.getElementById('modalOverlay');
+			modalOverlay.style.display = 'flex';
+		}
+	
+		function hideModal() {
+			var modalOverlay = document.getElementById('modalOverlay');
+			modalOverlay.style.display = 'none';
+		}
+
+		document.getElementById('musica').addEventListener('click', function() {
+    document.getElementById('miVentanaEmergente').style.display = 'block'; // Muestra la ventana emergente
+
+    document.getElementById('cerrarVentana').addEventListener('click', function() {
+      document.getElementById('miVentanaEmergente').style.display = 'none'; // Oculta la ventana emergente al hacer clic en el botón de cerrar
+    });
+  });
+
+
+
+  document.getElementById('cambiarFondo').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo1.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo2').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo2.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo3').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo3.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo4').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo4.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo5').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo5.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo6').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo6.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo7').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo7.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo8').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo8.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+
+  document.getElementById('cambiarFondo9').addEventListener('click', function() {
+    document.body.style.backgroundImage = "url('fondos/fondo9.png')"; // Reemplaza 'ruta_de_la_nueva_imagen.jpg' por la ruta de la imagen que deseas establecer como fondo
+  });
+	</script>
+	
+<script>
+		document.getElementById('sonido').addEventListener('click', function() {
+    document.getElementById('miSonidoLoop').style.display = 'block'; // Muestra la ventana emergente
+    
+	document.getElementById('cerradura').addEventListener('click', function() {
+      document.getElementById('miSonidoLoop').style.display = 'none'; // Oculta la ventana emergente al hacer clic en el botón de cerrar
+    });
+  });
+
+</script>
+	  
+<script>
+    var audioActual;
+
+    function reproducirAudio(idAudio) {
+        if (audioActual) {
+            audioActual.pause(); // Pausa el audio actual si existe
+        }
+
+        var audio = document.getElementById(idAudio);
+        audio.play();
+        audioActual = audio; // Establece el audio actual como el que se acaba de reproducir
+    }
+</script>
+
+<script>
+    function cambiarImagen(nuevaImagen) {
+        var imagen = document.getElementById('cube');
+        imagen.src = nuevaImagen;
+    }
+</script>
+
+
+
+

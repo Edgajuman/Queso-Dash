@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="queso dash.js"></script>
+		<link rel="stylesheet" href="queso dash.css">
+  <style>
+    body {
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('fondos/fondo3.png');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      animation: zoom-in-out 5s infinite alternate;
+    }
+
+    @keyframes zoom-in-out {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    #player {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-image: url('iconos/icon1.png');
+      background-size: cover;
+    }
+
+    .enemy {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+    }
+
+    .enemy2 {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+    }
+
+    .enemy1 {
+      background-image: url('texturas/enemigo.png');
+      background-size: cover;
+    }
+
+    .enemy2 {
+      background-image: url('texturas/enemigo2.png');
+      background-size: cover;
+    }
+
+    .bullet {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-image: url('texturas/balas.png');
+      background-size: cover;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <audio id="queso" src="sonidos/quesogame.mp3"></audio>
+<div id="mobileControls">
+  <button id="moveLeft" class="boton-anima" style="margin-left: 20px; margin-top: 500px;" onclick="reproducirAudio('queso')">
+    <img src="texturas/izquierda.png" width="120" height="120">
+  </button>
+  <button id="moveUp" class="boton-anima" style="margin-left: 30px; margin-top: 500px;" onclick="reproducirAudio('queso')">
+    <img src="texturas/arriba.png" width="120" height="120">
+  </button>
+  <button id="moveRight" class="boton-anima" style="margin-left: 40px; margin-top: 500px;" onclick="reproducirAudio('queso')">
+    <img src="texturas/derecha.png" width="120" height="120">
+  </button>
+  <button id="moveDown" class="boton-anima" style="margin-left: 10px; margin-top: 500px;" onclick="reproducirAudio('queso')">
+    <img src="texturas/abajo.png" width="120" height="120">
+  </button>
+
+  <button id="fireButton" class="boton-anima" style="margin-left: 550px; margin-top: 400px;" onclick="fireBullet()">
+    <img src="texturas/disparar.png" width="170" height="170">
+  </button>
+</div>
+
+
+  <script>
+
+// Crea un objeto de audio
+const audio = new Audio('sonidos/quesogame.mp3');
+
+// Función para reproducir el audio cuando se presiona una tecla
+function reproducirAudio() {
+  audio.play();
+}
+
+// Asocia la función de reproducción de audio a los eventos keydown de las flechas
+document.addEventListener("keydown", function(event) {
+  switch (event.keyCode) {
+    case 37: // Flecha izquierda
+    case 38: // Flecha arriba
+    case 39: // Flecha derecha
+    case 40: // Flecha abajo
+      reproducirAudio();
+      break;
+  }
+});
+
+
+    const player = document.getElementById("player");
+    let playerX = 0;
+    let playerY = 0;
+    const playerSpeed = 20;
+    const bullets = [];
+    const enemies = [];
+
+    function movePlayer(x, y) {
+      const playerRect = player.getBoundingClientRect();
+      const newX = playerX + x;
+      const newY = playerY + y;
+
+      if (
+        newX >= 0 &&
+        newX + playerRect.width <= window.innerWidth &&
+        newY >= 0 &&
+        newY + playerRect.height <= window.innerHeight
+      ) {
+        playerX = newX;
+        playerY = newY;
+        player.style.left = playerX + "px";
+        player.style.top = playerY + "px";
+      }
+    }
+
+    document.addEventListener("keydown", function(event) {
+      switch (event.keyCode) {
+        case 37:
+          movePlayer(-playerSpeed, 0);
+          break;
+        case 38:
+          movePlayer(0, -playerSpeed);
+          break;
+        case 39:
+          movePlayer(playerSpeed, 0);
+          break;
+        case 40:
+          movePlayer(0, playerSpeed);
+          break;
+      }
+    });
+
+    // Asocia la función de movimiento del jugador a los eventos click de los botones (para dispositivos móviles)
+document.getElementById("moveLeft").addEventListener("click", function() {
+  movePlayer(-playerSpeed, 0);
+});
+
+document.getElementById("moveUp").addEventListener("click", function() {
+  movePlayer(0, -playerSpeed);
+});
+
+document.getElementById("moveRight").addEventListener("click", function() {
+  movePlayer(playerSpeed, 0);
+});
+
+document.getElementById("moveDown").addEventListener("click", function() {
+  movePlayer(0, playerSpeed);
+});
+
+    document.addEventListener("click", function(event) {
+      createBullet();
+    });
+
+    function createBullet() {
+      const bullet = document.createElement("div");
+      bullet.className = "bullet";
+      bullet.style.left = (playerX + 20) + "px";
+      bullet.style.top = (playerY + 20) + "px";
+      document.body.appendChild(bullet);
+      bullets.push(bullet);
+    }
+
+    function moveBullets() {
+      bullets.forEach((bullet) => {
+        const bulletRect = bullet.getBoundingClientRect();
+        const newX = bulletRect.left;
+        const newY = bulletRect.top - 20;
+        bullet.style.top = newY + "px";
+
+        const enemies = document.getElementsByClassName("enemy");
+        for (let i = 0; i < enemies.length; i++) {
+          const enemy = enemies[i];
+          const rect1 = bullet.getBoundingClientRect();
+          const rect2 = enemy.getBoundingClientRect();
+          if (
+            rect1.x < rect2.x + rect2.width &&
+            rect1.x + rect1.width > rect2.x &&
+            rect1.y < rect2.y + rect2.height &&
+            rect1.y + rect1.height > rect2.y
+          ) {
+            enemy.remove();
+            const index = enemies.indexOf(enemy);
+            if (index > -1) {
+              enemies.splice(index, 1);
+            }
+            bullet.remove();
+            const bulletIndex = bullets.indexOf(bullet);
+            if (bulletIndex > -1) {
+              bullets.splice(bulletIndex, 1);
+            }
+          }
+        }
+
+        if (newY < 0) {
+          bullet.remove();
+          const index = bullets.indexOf(bullet);
+          if (index > -1) {
+            bullets.splice(index, 1);
+          }
+        }
+      });
+    }
+
+    setInterval(function() {
+      moveBullets();
+    }, 100);
+
+    setInterval(function() {
+      const enemy1 = document.createElement("div");
+      enemy1.className = "enemy enemy1";
+      enemy1.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+      enemy1.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
+      document.body.appendChild(enemy1);
+      enemies.push(enemy1);
+    }, 3000);
+
+    setInterval(function() {
+      const enemy2 = document.createElement("div");
+      enemy2.className = "enemy enemy2";
+      enemy2.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+      enemy2.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
+      document.body.appendChild(enemy2);
+      enemies.push(enemy2);
+    }, 5000);
+
+    function moveEnemies() {
+      enemies.forEach((enemy) => {
+        const directionX = Math.random() > 0.5 ? 1 : -1;
+        const directionY = Math.random() > 0.5 ? 1 : -1;
+        const speedX = Math.floor(Math.random() * 5) + 1;
+        const speedY = Math.floor(Math.random() * 5) + 1;
+        const enemyRect = enemy.getBoundingClientRect();
+
+        if (
+          enemyRect.left + enemyRect.width >= window.innerWidth ||
+          enemyRect.left <= 0
+        ) {
+          directionX *= -1;
+        }
+        if (
+          enemyRect.top + enemyRect.height >= window.innerHeight ||
+          enemyRect.top <= 0
+        ) {
+          directionY *= -1;
+        }
+
+        const newX = enemyRect.left + directionX * speedX;
+        const newY = enemyRect.top + directionY * speedY;
+
+        if (
+          newX >= 0 &&
+          newX + enemyRect.width <= window.innerWidth &&
+          newY >= 0 &&
+          newY + enemyRect.height <= window.innerHeight
+        ) {
+          enemy.style.left = newX + "px";
+          enemy.style.top = newY + "px";
+        }
+      });
+    }
+
+// Función para disparar el proyectil
+function fireBullet() {
+      createBullet();
+      reproducirAudio('queso');
+    }
+
+    // Asociar la función de disparo del proyectil al evento click del botón en dispositivos móviles
+    document.getElementById("fireButton").addEventListener("click", function() {
+      fireBullet();
+    });
+
+    setInterval(function() {
+      moveEnemies();
+    }, 100);
+
+    setInterval(function() {
+      const playerRect = player.getBoundingClientRect();
+      const enemies = document.getElementsByClassName("enemy");
+      for (let i = 0; i < enemies.length; i++) {
+        const enemy = enemies[i];
+        const rect1 = playerRect;
+        const rect2 = enemy.getBoundingClientRect();
+        if (
+          rect1.x < rect2.x + rect2.width &&
+          rect1.x + rect1.width > rect2.x &&
+          rect1.y < rect2.y + rect2.height &&
+          rect1.y + rect1.height > rect2.y
+        )
+        {
+          alert("¡Perdiste! Recarga la página para reiniciar el juego.");
+          location.reload();
+        }
+      }
+    }, 100);
+  </script>
+</body>
+</html>
